@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MeuCorre.core.Entities
+namespace MeuCorre.Domain.Entities
 {
      public abstract class Entidade
     {
