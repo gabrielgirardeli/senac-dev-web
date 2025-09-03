@@ -17,4 +17,8 @@
     <Folder Include="UseCases\Usuarios\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MeuCorre.Infra\MeuCorre.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

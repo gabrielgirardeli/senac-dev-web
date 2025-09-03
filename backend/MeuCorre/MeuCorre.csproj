@@ -18,4 +18,9 @@
     <Folder Include="NovaPasta\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MeuCorre.Application\MeuCorre.Application.csproj" />
+    <ProjectReference Include="..\MeuCorre.Infra\MeuCorre.Infra.csproj" />
+  </ItemGroup>
+
 </Project>
