@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MeuCorre.core.Entities;
+using MeuCorre.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace MeuCorre.Infra.Context
