@@ -1,4 +1,5 @@
-﻿using MeuCorre.core.Enums;
+﻿
+using MeuCorre.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace MeuCorre.Domain.Entities
     {
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public  TipoTransacao  tipo { get; set; }
+        public TipoTransacao tipo { get; set; }
         public string Cor { get; set; }
         public string Icone { get; set; }
         public bool Ativo { get;set; }
