@@ -14,6 +14,8 @@ namespace MeuCorre.Domain.Entities
         public DateTime DataNascimento { get;private set; }
         public bool Ativo { get; private set; }
 
+        public virtual ICollection<Categoria> Categorias { get; set; }
+
         public Usuario(string nome, string email, string senha, DateTime dataNascimento, bool ativo)
         {
             if(!TemIdadeMinima())

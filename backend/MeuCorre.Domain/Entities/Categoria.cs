@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace MeuCorre.Domain.Entities
 {
-   public class Categoria : Entidade
+   public class   Categoria: Entidade
     {
+        public object TipoTransacao;
+
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public TipoTransacao tipo { get; set; }
@@ -17,7 +19,9 @@ namespace MeuCorre.Domain.Entities
         public string Icone { get; set; }
         public bool Ativo { get;set; }
         public Guid? UsuarioId { get; set; }
+       
 
+        public virtual Usuario Usuario { get; set; }
 
         public Categoria(string nome, string descricao, TipoTransacao tipo, string cor, string icone, bool ativo, Guid usuarioid)
         {
