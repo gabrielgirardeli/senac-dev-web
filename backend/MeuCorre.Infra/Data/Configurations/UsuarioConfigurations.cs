@@ -44,4 +44,5 @@ namespace MeuCorre.Infra.Data.Configurations
                 .IsUnique();
         }
     }
+
 }

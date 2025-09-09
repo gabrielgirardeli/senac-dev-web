@@ -14,16 +14,18 @@ namespace MeuCorre.Domain.Entities
 
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public TipoTransacao tipo { get; set; }
+        public TipoTransacao tipo { get; private set; }
         public string Cor { get; set; }
         public string Icone { get; set; }
         public bool Ativo { get;set; }
         public Guid? UsuarioId { get; set; }
+        
+        public Categoria() { }
        
 
         public virtual Usuario Usuario { get; set; }
 
-        public Categoria(string nome, string descricao, TipoTransacao tipo, string cor, string icone, bool ativo, Guid usuarioid)
+        public Categoria(string nome, string descricao, string cor, string icone, bool ativo, Guid usuarioid)
         {
             Nome = nome;
             Descricao = descricao;
