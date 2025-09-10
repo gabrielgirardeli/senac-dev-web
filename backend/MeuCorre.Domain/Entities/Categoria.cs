@@ -10,11 +10,11 @@ namespace MeuCorre.Domain.Entities
 {
    public class   Categoria: Entidade
     {
-        public object TipoTransacao;
+      
 
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public TipoTransacao tipo { get; private set; }
+        public TipoTransacao Tipo { get; set; }
         public string Cor { get; set; }
         public string Icone { get; set; }
         public bool Ativo { get;set; }

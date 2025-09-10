@@ -28,7 +28,7 @@ namespace MeuCorre.Infra.Data.Configurations
             builder.Property(categoria => categoria.Icone)
                 .IsRequired();
 
-            builder.Property(categoria => categoria.TipoTransacao)
+            builder.Property(categoria => categoria.Tipo)
                 .IsRequired();
             
                 
