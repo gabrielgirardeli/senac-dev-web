@@ -11,7 +11,7 @@ namespace MeuCorre.Infra.Data.Context
             ChangeTracker.AutoDetectChangesEnabled = false;
         }
 
-        public DbSet<Usuario> categorias { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
