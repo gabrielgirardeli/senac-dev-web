@@ -39,12 +39,7 @@ namespace MeuCorre.Application.UseCases.Usuarios.Commands
                 return ("Já existe um usuario cadastrado com este email", false);
             }
 
-            var ano = DateTime.Now.Year;
-            var idade = ano - request.DataNascimento.Year;
-            if (idade < 13)
-            {
-                return ("Usuário deve ser maior de 13 anos", false);
-            }
+        
             var novoUsuario = new Usuario(
                 request.Nome,
                 request.Email,
