@@ -14,7 +14,14 @@
     <Folder Include="UseCases\Categorias\" />
     <Folder Include="UseCases\Relatorios\" />
     <Folder Include="UseCases\Transacoes\" />
-    <Folder Include="UseCases\Usuarios\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MeuCorre.Infra\MeuCorre.Infra.csproj" />
   </ItemGroup>
 
 </Project>
