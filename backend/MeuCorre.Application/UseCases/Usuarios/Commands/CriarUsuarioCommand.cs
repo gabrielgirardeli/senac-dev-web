@@ -26,8 +26,8 @@ namespace MeuCorre.Application.UseCases.Usuarios.Commands
     }
     internal class CriarUsuarioCommandHandler : IRequestHandler<CriarUsuarioCommand, (string, bool)>
     {
-        private readonly IUsuarioRepositories _usuarioRepositories;
-        public CriarUsuarioCommandHandler(IUsuarioRepositories usuarioRepositories)
+        private readonly IUsuarioRepository _usuarioRepositories;
+        public CriarUsuarioCommandHandler(IUsuarioRepository usuarioRepositories)
         {
             _usuarioRepositories = usuarioRepositories;
         }

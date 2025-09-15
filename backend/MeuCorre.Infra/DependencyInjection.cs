@@ -21,7 +21,7 @@ namespace MeuCorre.Infra
             services.AddDbContext<MeuDbContext>(options =>
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-            services.AddScoped<IUsuarioRepositories, UsuarioRepositories>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             return services;
 

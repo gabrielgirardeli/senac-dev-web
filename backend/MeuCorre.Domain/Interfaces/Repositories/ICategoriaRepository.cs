@@ -3,7 +3,7 @@ using MeuCorre.Domain.Enums;
 
 namespace MeuCorre.Domain.Interfaces.Repositories
 {
-   public interface ICategoriaRepositories
+   public interface ICategoriaRepository
     {
         Task<Categoria> ObterPorIdAsync(Guid categoriaId);
         Task<IEnumerable<Categoria>> ObterTodosAsync(Guid usuarioId);

@@ -1,53 +1,79 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System.Text.RegularExpressions;
 
 namespace MeuCorre.Domain.Entities
 {
     public class Usuario : Entidade
     {
-        public  string Nome { get;private set; }
-        public string Email { get;private set; }
+        public string Nome { get; private set; }
+        public string Email { get; private set; }
         public string Senha { get; private set; }
-        public DateTime DataNascimento { get;private set; }
+        public DateTime DataNascimento { get; private set; }
         public bool Ativo { get; private set; }
 
+        // Propriedade de navegação para a entidade Categoria pois
+        // o usuário pode ter várias categorias
         public virtual ICollection<Categoria> Categorias { get; set; }
 
 
-
+        //Construtor para criar um novo usuário.
+        //Construtor é a primeira coisa que é executada quando uma classe é instanciada.
         public Usuario(string nome, string email, string senha, DateTime dataNascimento, bool ativo)
         {
-           
+            ValidarEntidadeUsuario(email, senha, dataNascimento);
+
             Nome = nome;
             Email = email;
-            Senha = ValidarSenha(senha);
-            DataNascimento = ValidarIdadeMinima(dataNascimento);
+            Senha = senha;
+            DataNascimento = dataNascimento;
             Ativo = ativo;
 
         }
+        public void AtualizarInformacoes (string nome,  DateTime dataNascimento)
+        {
+          ValidarIdadeMinina(dataNascimento);
+            Nome = nome;
+          
+          
+            DataNascimento = dataNascimento;
+            AtualizarDataModificacao();
+        }
+        public void AtivarUsuario()
+        {
+            Ativo = true;
+            AtualizarDataModificacao();
+        }
 
-        private DateTime ValidarIdadeMinima(DateTime nascimento)
+        public void InativarUsuario()
+        {
+            Ativo = false;
+            AtualizarDataModificacao();
+        }
+
+
+        private void ValidarEntidadeUsuario(string email, string senha, DateTime nascimento)
+        {
+            ValidarIdadeMinina(nascimento);
+            ValidarSenha(senha);
+            ValidarEmail(email);
+        }
+
+        private void ValidarIdadeMinina(DateTime nascimento)
         {
             var hoje = DateTime.Today;
-            var idade = hoje.Year - DataNascimento.Year;
+            var idade = hoje.Year - nascimento.Year;
 
             if (nascimento.Date > hoje.AddYears(-idade))
                 idade--;
 
-           if (idade > 13)
+            if (idade < 13)
             {
-                throw new Exception("Usuario deve ser maior de 13 anos");
+                //Interrompe o processo devolvendo o erro
+                throw new Exception("Usuário deve ter no minimo 13 anos");
             }
-            return nascimento;
         }
-
-       
-        public string ValidarSenha(string senha)
+        public void ValidarSenha(string senha)
         {
+            //Regra de dnegocio: pelo menos uma letra e um número.
             if (!Regex.IsMatch(senha, "[a-z]"))
             {
                 throw new Exception("A senha deve contar pelo menos uma letra minuscula");
@@ -60,23 +86,15 @@ namespace MeuCorre.Domain.Entities
             {
                 throw new Exception("A senha deve contar pelo menos um números");
             }
-
-            return senha;
         }
-      
-
-        public void AtivarUsuario()
+        private void ValidarEmail(string email)
         {
-            Ativo = true;
-            AtualizarDataModificacao();
+            //Regra de negocio: email deve conter @ e um domínio válido.
+            if (!Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                throw new Exception("Email em formato inválido");
+            }
         }
-        public void InativarUsuario()
-        {
-            Ativo = false;
-            AtualizarDataModificacao();
-
-        }
-
-      
+     
     }
 }
