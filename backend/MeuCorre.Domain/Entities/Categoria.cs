@@ -26,7 +26,7 @@ namespace MeuCorre.Domain.Entities
 
         public virtual Usuario Usuario { get; set; }
 
-        public Categoria(string nome, string? descricao, string? cor, string? icone, bool ativo, Guid usuarioid,TipoTransacao tipo)
+        public Categoria(string nome, string? descricao, string? cor, string? icone, Guid usuarioid,TipoTransacao tipo)
         {
             ValidarEntidadeCategoria(cor);
 
@@ -40,13 +40,12 @@ namespace MeuCorre.Domain.Entities
 
         }
 
-        public void AtualizarInformacoes(string nome, string descricao, string cor, string icone, bool ativo, TipoTransacao tipo)
+        public void AtualizarInformacoes(string nome, string descricao, string cor, string icone,  TipoTransacao tipo)
         {
             Nome = nome.ToUpper();
             Descricao = descricao;
             Cor = cor;
             Icone = icone;
-            Ativo = true;
             Tipo = new TipoTransacao();
             AtualizarDataModificacao();
         }
