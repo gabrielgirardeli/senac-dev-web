@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\Interfaces\" />
-    <Folder Include="DTOs\Mappers\" />
-    <Folder Include="DTOs\Common\" />
-    <Folder Include="DTOs\Validators\" />
     <Folder Include="UseCases\Relatorios\" />
     <Folder Include="UseCases\Transacoes\" />
   </ItemGroup>

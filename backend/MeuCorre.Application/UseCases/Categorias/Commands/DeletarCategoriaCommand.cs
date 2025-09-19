@@ -1,42 +1,41 @@
-﻿using MediatR;
+﻿using System.ComponentModel.DataAnnotations;
+using MediatR;
 using MeuCorre.Domain.Interfaces.Repositories;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeuCorre.Application.UseCases.Categorias.Commands
 {
-   public class DeletarCategoriaCommand : IRequest<(string, bool)>
+    public class DeletarCategoriaCommad : IRequest<(string, bool)>
     {
-        [Required(ErrorMessage = "e necessario informar o id do Categoria.")]
-        public required Guid CategoriaId { get; set; }
-        [Required(ErrorMessage = "e necessario informar o id do usuario.")]
-    
+        [Required(ErrorMessage = "E necessário informar o id do usuário")]
         public required Guid UsuarioId { get; set; }
-     
+
+        [Required(ErrorMessage = "E necessário informar o id da categoria")]
+        public required Guid CategoriaId { get; set; }
     }
-    internal class DeletarCategoriaCommandHandler : IRequestHandler<DeletarCategoriaCommand, (string, bool)>
+
+    internal class DeletarCategoriaCommadHandler : IRequestHandler<DeletarCategoriaCommad, (string, bool)>
     {
         private readonly ICategoriaRepository _categoriaRepository;
-        public DeletarCategoriaCommandHandler(ICategoriaRepository categoriaRepository)
+        public DeletarCategoriaCommadHandler(ICategoriaRepository categoriaRepository)
         {
-             _categoriaRepository = categoriaRepository;
+            _categoriaRepository = categoriaRepository;
         }
-        public Task<(string, bool)> Handle(DeletarCategoriaCommand request, CancellationToken cancellationToken)
-        {
-            var categoria = _categoriaRepository.ObterPorIdAsync(request.CategoriaId).Result;
 
-            if (categoria == null || categoria.UsuarioId != request.UsuarioId)
-            {
-                return Task.FromResult(("Categoria não encontrada ou não pertence ao usuário.", false));
-            }
-           
-            throw new NotImplementedException();
+        public async Task<(string, bool)> Handle(DeletarCategoriaCommad request, CancellationToken cancellationToken)
+        {
+            var categoria = await _categoriaRepository.ObterPorIdAsync(request.CategoriaId);
+
+            if (categoria == null)
+                return ("Categoria não encontrada", false);
+
+            if (categoria.UsuarioId != request.UsuarioId)
+                return ("Categoria não pertence ao usuário", false);
+
+            await _categoriaRepository.RemoverAsync(categoria);
+
+            return ("Categoria removida com sucesso", true);
         }
     }
+
 
 }
