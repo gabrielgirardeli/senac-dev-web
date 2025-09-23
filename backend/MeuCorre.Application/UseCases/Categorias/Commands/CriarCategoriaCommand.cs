@@ -24,14 +24,17 @@ namespace MeuCorre.Application.UseCases.Categorias.Commands
     internal class CriarCategoriaCommanHandler : IRequestHandler<CriarCategoriaCommand, (string, bool)>
     {
         private readonly ICategoriaRepository _categoriaRepository;
+        private readonly IUsuarioRepository _usuarioRepository;
 
-        public CriarCategoriaCommanHandler(ICategoriaRepository categoriaRepository)
+        public CriarCategoriaCommanHandler(ICategoriaRepository categoriaRepository, IUsuarioRepository usuarioRepository)
         {
             _categoriaRepository = categoriaRepository;
+            _usuarioRepository = usuarioRepository;
         }
 
         public async Task<(string, bool)> Handle(CriarCategoriaCommand request, CancellationToken cancellationToken)
         {
+            var usuario = await _usuarioRepository.ObterUsuario(request.UsuarioId);
             var existe = await _categoriaRepository.NomeExisteParaUsuarioAsync(request.Nome, request.Tipo, request.UsuarioId);
 
             if (existe)
