@@ -34,7 +34,11 @@ namespace MeuCorre.Application.UseCases.Categorias.Commands
 
         public async Task<(string, bool)> Handle(CriarCategoriaCommand request, CancellationToken cancellationToken)
         {
-            var usuario = await _usuarioRepository.ObterUsuario(request.UsuarioId);
+            var usuario = await _usuarioRepository.ObterUsuarioPorId(request.UsuarioId);
+            if (usuario == null)
+            {
+                return ("Usuario inválido", false);
+            }
             var existe = await _categoriaRepository.NomeExisteParaUsuarioAsync(request.Nome, request.Tipo, request.UsuarioId);
 
             if (existe)
