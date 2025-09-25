@@ -61,7 +61,7 @@ namespace MeuCorre.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeletarCategoria([FromRoute] DeletarCategoriaCommad command)
+        public async Task<IActionResult> DeletarCategoria([FromBody] DeletarCategoriaCommad command)
         {
            
            var (mensagem, sucesso) = await _mediator.Send(command);
@@ -78,7 +78,7 @@ namespace MeuCorre.Controllers
            
         }
 
-        [HttpPatch("{id}/ativar")]
+        [HttpPatch("ativar/{id}")]
 
         public async Task<IActionResult> AtivarCategoria(Guid id)
         {
@@ -94,7 +94,7 @@ namespace MeuCorre.Controllers
             }
         }
 
-        [HttpPatch("{id}/Inativar")]
+        [HttpPatch("Inativar/{id}")]
 
         public async Task<IActionResult> InativarCategoria(Guid id)
         {

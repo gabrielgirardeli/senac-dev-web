@@ -26,7 +26,7 @@ namespace MeuCorre.Domain.Entities
 
         public virtual Usuario Usuario { get; set; }
 
-        public Categoria(string nome, string? descricao, string? cor, string? icone, Guid usuarioid,TipoTransacao tipo)
+        public Categoria(string nome, string? descricao, string? cor, string? icone, Guid usuarioid, TipoTransacao tipo)
         {
             ValidarEntidadeCategoria(cor);
 
@@ -36,7 +36,7 @@ namespace MeuCorre.Domain.Entities
             Icone = icone;
             Ativo = true;
             UsuarioId = usuarioid;
-            Tipo = new TipoTransacao();
+            Tipo = tipo;
 
         }
 
@@ -67,9 +67,9 @@ namespace MeuCorre.Domain.Entities
             {
                 return;
             }
-            var corRegex = new Regex(@"^#?([0-9a-fA-F]{3}) {1,2}$");
-            
-            if(!corRegex.IsMatch(cor))
+            var corRegex = new Regex(@"^#?([0-9A-Fa-f]{6}|[0-9A-Fa-f]{8})$");
+
+            if (!corRegex.IsMatch(cor))
             {
                 throw new Exception(" A cor deve estar no formato hexadecimal");
             }

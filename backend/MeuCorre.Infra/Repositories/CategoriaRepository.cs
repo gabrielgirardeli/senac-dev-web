@@ -52,10 +52,10 @@ namespace MeuCorre.Infra.Repositories
             return existe;
         }
 
-      public  async Task<Categoria?> ObterPorIdAsync(Guid categoriaId)
+      public  async Task<Categoria> ObterPorIdAsync(Guid categoriaId)
         {
             var categoria =
-               await _meuDbContext.Categorias.FirstOrDefaultAsync(c => c.Id == categoriaId);
+               await _meuDbContext.Categorias.FirstOrDefaultAsync(c => c.Id == categoriaId );
             return categoria;
         }
 
