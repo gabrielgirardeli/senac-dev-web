@@ -1,6 +1,8 @@
 
 using MeuCorre.Application;
+using MeuCorre.Domain.Interfaces.Repositories;
 using MeuCorre.Infra;
+using MeuCorre.Infra.Repositories;
 
 namespace MeuCorre
 {
@@ -15,6 +17,9 @@ namespace MeuCorre
             builder.Services.AddControllers();
             builder.Services.AddInfra(builder.Configuration);
             builder.Services.AddApplication(builder.Configuration);
+
+            //// esse 
+            builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
