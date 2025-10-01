@@ -10,72 +10,64 @@ namespace MeuCorre.Domain.Entities
 {
     public class  Conta : Entidade
     {
-        // --- Propriedades Obrigatórias ---
+       
         public string Nome { get; private set; }
+
         public TipoConta Tipo { get; private set; }
 
-        // Saldo: valor USADO para Cartão, valor DISPONÍVEL para outros tipos.
         public decimal Saldo { get; private set; } = 0.00m;
-        public Guid UsuarioId { get; private set; }
-        public bool Ativo { get; private set; } = true;
-        // DataCriacao (Herdado de BaseEntity)
 
-        // --- Propriedades Opcionais/Adicionais ---
+        public Guid UsuarioId { get; private set; }
+
+        public bool Ativo { get; private set; } = true;
+
         public decimal? Limite { get; private set; }
 
-        /// <summary>
-        /// Define se o limite é Total ou Mensal. Válido apenas para TipoConta.CartaoCredito.
-        /// </summary>
-        public TipoLimite? TipoLimite { get; private set; } // <--- INCLUÍDO
+        public TipoLimite? TipoLimite { get; private set; } 
 
         public int? DiaFechamento { get; private set; }
+
         public int? DiaVencimento { get; private set; }
+
         public string Cor { get; private set; }
+
         public string Icone { get; private set; }
+
         public DateTime? DataAtualizacao { get; private set; }
 
-        // --- Navigation Property ---
+        
         [ForeignKey("UsuarioId")]
         public virtual Usuario Usuario { get; private set; }
 
 
-        // Construtor vazio para o EF Core
+        
         protected Conta() { }
-
-        // Construtor principal para criação da conta
         public Conta(Guid id, string nome, TipoConta tipo, decimal saldoInicial, Guid usuarioId, bool ativo = true,
-                     decimal? limite = null, TipoLimite? tipoLimite = null, // <--- NOVO PARÂMETRO
+                     decimal? limite = null, TipoLimite? tipoLimite = null, 
                      int? diaFechamento = null, int? diaVencimento = null, string cor = null, string icone = null)
         {
-            // Propriedades da Conta
+           
             this.Nome = nome ?? throw new ArgumentNullException(nameof(nome));
             this.Tipo = tipo;
             this.Saldo = saldoInicial;
             this.UsuarioId = usuarioId;
             this.Ativo = ativo;
 
-            // Opcionais
+            
             this.Limite = limite;
             this.DiaFechamento = diaFechamento;
             this.DiaVencimento = diaVencimento;
             this.Cor = cor;
             this.Icone = icone;
-            this.TipoLimite = tipoLimite; // <--- ATRIBUIÇÃO DO NOVO CAMPO
+            this.TipoLimite = tipoLimite; 
         }
 
-        // --- Métodos de Domínio Úteis ---
-
-        /// <summary>
-        /// Verifica se a conta é um Cartão de Crédito.
-        /// </summary>
         public bool EhCartaoCredito()
         {
             return this.Tipo == TipoConta.CartaoCredito;
         }
 
-        /// <summary>
-        /// Verifica se a conta é uma Carteira.
-        /// </summary>
+        
         public bool EhCarteira()
         {
             return this.Tipo == TipoConta.Carteira;
