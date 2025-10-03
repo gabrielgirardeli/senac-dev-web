@@ -40,7 +40,8 @@ namespace MeuCorre.Domain.Entities
         public virtual Usuario Usuario { get; private set; }
 
 
-        
+
+
         protected Conta() { }
         public Conta(Guid id, string nome, TipoConta tipo, decimal saldoInicial, Guid usuarioId, bool ativo = true,
                      decimal? limite = null, TipoLimite? tipoLimite = null, 
@@ -150,6 +151,13 @@ namespace MeuCorre.Domain.Entities
             this.Ativo = false;
             this.DataAtualizacao = DateTime.UtcNow;
         }
+
+        public void Ativar()
+        {
+            this.Ativo = true;
+            this.DataAtualizacao = DateTime.UtcNow;
+        }
+       
 
         public void AtualizarDados(string novoNome, string novaCor, string novoIcone)
         {

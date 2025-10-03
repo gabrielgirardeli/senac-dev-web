@@ -94,5 +94,12 @@ namespace MeuCorre.Infra.Repositories
         {
             await _meuDbContext.SaveChangesAsync();
         }
+        public void Remover(Conta conta)
+        {
+            // Usa o DbSet para marcar a entidade para remoção
+            _meuDbContext.Contas.Remove(conta);
+        }
+
+
     }
 }
