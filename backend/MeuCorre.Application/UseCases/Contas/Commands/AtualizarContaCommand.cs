@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using MeuCorre.Domain.Enums;
 using MeuCorre.Domain.Interfaces.Repositories;
+using MediatR;
+using Application.UseCases.Contas.Commands;
 
 namespace Application.UseCases.Contas.Commands
 {
@@ -10,17 +12,17 @@ namespace Application.UseCases.Contas.Commands
         public Guid UsuarioId { get; set; }
 
         // Campos editáveis
-        public string? Nome { get; set; }      // <-- Corrigido
+        public string? Nome { get; set; }      
         public decimal? Limite { get; set; }
         public int? DiaFechamento { get; set; }
         public int? DiaVencimento { get; set; }
-        public string? Cor { get; set; }       // <-- Corrigido
-        public string? Icone { get; set; }     // <-- Corrigido
+        public string? Cor { get; set; }       
+        public string? Icone { get; set; }    
         public bool? Ativo { get; set; }
         public TipoLimite? TipoLimite { get; internal set; }
     }
 
-    internal class AtualizarContaCommandHandler : IRequestHandler<AtualizarContaCommand, (string, bool)>
+    public class AtualizarContaCommandHandler : IRequestHandler<AtualizarContaCommand, (string, bool)>
     {
         private readonly IContaRepository _contaRepository;
 
@@ -30,16 +32,15 @@ namespace Application.UseCases.Contas.Commands
         }
 
 
-        // Seu Handler DEVE retornar a tupla (string, bool) para compilar
         public async Task<(string, bool)> Handle(AtualizarContaCommand request, CancellationToken cancellationToken)
         {
-            // 1. Busca Segura
+          
             var conta = await _contaRepository.ObterPorIdEUsuarioAsync(request.ContaId, request.UsuarioId);
 
             if (conta == null)
                 return ("Conta não encontrada ou não pertence ao usuário.", false);
 
-            // 2. Validação de Unicidade (Mantida para ser executada antes da modificação)
+           
             if (!string.IsNullOrWhiteSpace(request.Nome) && request.Nome.ToLower() != conta.Nome.ToLower())
             {
                 if (await _contaRepository.ExisteContaComNomeAsync(request.UsuarioId, request.Nome, request.ContaId))
