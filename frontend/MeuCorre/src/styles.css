@@ -1,3 +1,4 @@
+@import 'remixicon/fonts/remixicon.css';
 /* You can add global styles to this file, and also import other style files */
 :root {
  --mc-blue-purple:#592EF2;
@@ -14,6 +15,6 @@
  background-color: var(--mc-grey);
 }
 
-.mc-text-blue-green {
+.mc-text-green {
  color: var(--mc-green);
 }

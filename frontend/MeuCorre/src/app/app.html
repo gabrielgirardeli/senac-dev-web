@@ -1,45 +1,53 @@
+
 <nav class="navbar mc-bg-dark">
   <div class="container-xxl">
     <a class="navbar-brand" href="#">
-     
       Bootstrap
     </a>
     <ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-  </li>
-</ul>
-
-<ul class="nav justify-content-end">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-  </li>
-</ul>
+      <li class="nav-item">
+        <a class="nav-link mc-text-green active" aria-current="page" href="#">Visão Geral</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mc-text-green" href="#">Lançamentos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mc-text-green" href="#">Relatórios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mc-text-green " aria-disabled="true">Gráficos</a>
+      </li>
+    </ul>
+    <ul class="nav justingfy-content-end mc-text-green">
+      <li class="nav-item">
+        <div ngbDropdown>
+          <a class="nav-link mc-text-green active" href="#" id="dropconfiguracao" ngbDropdownToggle>
+            <i class="ri-settings-line ri-lg"></i>
+          </a>
+          <div ngbDropdownMenu aria-labelledby="dropconfiguracao">
+            <button ngbDropdownItem>Contas </button>
+            <button ngbDropdownItem>Categorias</button>
+            <button ngbDropdownItem>Cartão de Crédito</button>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mc-text-green" href="#"><i class="ri-notification-line ri-lg"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mc-text-green" href="#"><i class="ri-account-circle-line ri-lg"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link mc-text-green disabled" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
   </div>
 </nav>
+
 <nav class="navbar bg-white">
   <div class="container-xxl">
     <a class="navbar-brand" href="#">
-     
-      Assine o premium
+      Assine o Premium
     </a>
   </div>
 </nav>
