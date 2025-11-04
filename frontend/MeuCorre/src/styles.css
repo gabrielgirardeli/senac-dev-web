@@ -18,3 +18,12 @@
 .mc-text-green {
  color: var(--mc-green);
 }
+
+.btn-outline-secondary {
+    --bs-btn-color: #a0a0a0;
+    --bs-btn-border-color: #f2f4EF;
+    --bs-btn-hover-color: #989898;
+    --bs-btn-hover-bg: #F2F4EF;
+    --bs-btn-hover-border-color: #F2F4EF;
+   
+}
