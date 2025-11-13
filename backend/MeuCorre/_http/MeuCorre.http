@@ -1,4 +1,4 @@
-@MeuCorre_HostAddress = http://localhost:5116
+@MeuCorre_HostAddress = http://localhost:5041
 
 GET {{MeuCorre_HostAddress}}/weatherforecast/
 Accept: application/json

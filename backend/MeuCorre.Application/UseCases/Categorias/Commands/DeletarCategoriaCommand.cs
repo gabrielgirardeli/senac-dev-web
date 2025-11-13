@@ -12,7 +12,6 @@ namespace MeuCorre.Application.UseCases.Categorias.Commands
         [Required(ErrorMessage = "E necessário informar o id da categoria")]
         public required Guid CategoriaId { get; set; }
     }
-
     internal class DeletarCategoriaCommadHandler : IRequestHandler<DeletarCategoriaCommad, (string, bool)>
     {
         private readonly ICategoriaRepository _categoriaRepository;

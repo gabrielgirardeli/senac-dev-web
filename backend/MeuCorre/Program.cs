@@ -1,9 +1,6 @@
 
-using Application.UseCases.Contas.Commands;
 using MeuCorre.Application;
-using MeuCorre.Domain.Interfaces.Repositories;
 using MeuCorre.Infra;
-using MeuCorre.Infra.Repositories;
 
 namespace MeuCorre
 {
@@ -16,16 +13,9 @@ namespace MeuCorre
             // Add services to the container.
 
             builder.Services.AddControllers();
-            builder.Services.AddInfra(builder.Configuration);
+            builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication(builder.Configuration);
 
-            //// esse 
-            builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
-            builder.Services.AddScoped<IContaRepository, ContaRepository>();
-            builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>(); // se tiver Handlers que usam usuário
-
-            builder.Services.AddMediatR(cfg =>
-           cfg.RegisterServicesFromAssembly(typeof(AtualizarContaCommand).Assembly));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

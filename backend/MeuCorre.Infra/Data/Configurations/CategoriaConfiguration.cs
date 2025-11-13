@@ -8,50 +8,41 @@ namespace MeuCorre.Infra.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
+            //Define o nome da tabela no banco de dados.
             builder.ToTable("Categorias");
 
+            //Define a chave primária.
             builder.HasKey(categoria => categoria.Id);
             
-
-
+            //Define as propriedades da entidade e suas configurações.
             builder.Property(categoria => categoria.Nome)
                 .IsRequired()
                 .HasMaxLength(100);
 
             builder.Property(categoria => categoria.Descricao)
-                  .IsRequired(false)
-                  .HasMaxLength(255);
+                .HasMaxLength(255);
 
             builder.Property(categoria => categoria.Cor)
-               .IsRequired();
+                .HasMaxLength(10);
 
             builder.Property(categoria => categoria.Icone)
+                .HasMaxLength(10);
+
+            builder.Property(categoria => categoria.TipoDaTransacao)
                 .IsRequired();
 
-            builder.Property(categoria => categoria.Tipo)
+            builder.Property(usuario => usuario.DataCriacao)
                 .IsRequired();
-            
-                
 
+            builder.Property(usuario => usuario.DataAtualizacao)
+                .IsRequired(false);
 
-            builder.Property(categoria => categoria.UsuarioId)
-               .IsRequired();
-
-            builder.Property(categoria => categoria.DataCriacao)
-               .IsRequired();
-
-
-            builder.Property(categoria => categoria.DataAtualizacao)
-               .IsRequired(false);
-
+            //Chaves Estrangeiras FK
+            //Define o relacionamento entre Categoria e Usuario 
             builder.HasOne(categoria => categoria.Usuario)
                 .WithMany(usuario => usuario.Categorias)
                 .HasForeignKey(categoria => categoria.UsuarioId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-
-
-
         }
     }
 }

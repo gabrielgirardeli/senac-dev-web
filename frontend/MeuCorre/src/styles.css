@@ -1,29 +1,30 @@
 @import 'remixicon/fonts/remixicon.css';
+
 /* You can add global styles to this file, and also import other style files */
-:root {
- --mc-blue-purple:#592EF2;
- --mc-dark:#141926;
- --mc-grey:#BFCAD9;
- --mc-green:#29F280;
- --mc-green-dark: #24733F;
-}
-.mc-bg-dark {
- background-color: var(--mc-dark);
-
-}
-.mc-bg-grey {
- background-color: var(--mc-grey);
+:root{
+    --mc-blue-purple: #592EF2;
+    --mc-dark: #141926;
+    --mc-grey: #BFCAD9;
+    --mc-green: #29F280;
+    --mc-green-dark: #24733F;
 }
 
-.mc-text-green {
- color: var(--mc-green);
+.mc-bg-dark{
+    background-color: var(--mc-dark);
+}
+
+.mc-bg-grey{
+    background-color: var(--mc-grey);
+}
+
+.mc-text-green{
+    color: var(--mc-green);
 }
 
 .btn-outline-secondary {
-    --bs-btn-color: #a0a0a0;
-    --bs-btn-border-color: #f2f4EF;
+    --bs-btn-color: #A0A0A0;
+    --bs-btn-border-color: #F2F4EF;
     --bs-btn-hover-color: #989898;
     --bs-btn-hover-bg: #F2F4EF;
     --bs-btn-hover-border-color: #F2F4EF;
-   
 }

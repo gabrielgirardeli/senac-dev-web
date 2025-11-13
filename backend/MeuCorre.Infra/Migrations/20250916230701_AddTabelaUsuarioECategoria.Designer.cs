@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MeuCorre.Infra.Migrations
 {
     [DbContext(typeof(MeuDbContext))]
-    [Migration("20250916230901_addTabelaUsuarioECategoria")]
-    partial class addTabelaUsuarioECategoria
+    [Migration("20250916230701_AddTabelaUsuarioECategoria")]
+    partial class AddTabelaUsuarioECategoria
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,8 +35,8 @@ namespace MeuCorre.Infra.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Cor")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime(6)");
@@ -49,19 +49,18 @@ namespace MeuCorre.Infra.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Icone")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<int>("Tipo")
+                    b.Property<int>("TipoDaTransacao")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("UsuarioId")
-                        .IsRequired()
+                    b.Property<Guid>("UsuarioId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");

@@ -1,5 +1,4 @@
-﻿
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using MediatR;
 using MeuCorre.Application.UseCases.Categorias.Dtos;
 using MeuCorre.Domain.Interfaces.Repositories;
@@ -35,7 +34,7 @@ namespace MeuCorre.Application.UseCases.Categorias.Queries
                 {
                     Nome = cat.Nome,
                     Ativo = cat.Ativo,
-                    tipo = cat.Tipo,
+                    Tipo = cat.TipoDaTransacao,
                     Cor = cat.Cor,
                     Descricao = cat.Descricao,
                     Icone = cat.Icone,
@@ -48,4 +47,3 @@ namespace MeuCorre.Application.UseCases.Categorias.Queries
     }
 
 }
-
