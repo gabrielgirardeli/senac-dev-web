@@ -21,10 +21,10 @@ namespace MeuCorre
             builder.Services.AddSwaggerGen();
             builder.Services.AddCors(options =>
             {
-                options.AddPolicy("PermitirAngularDev",
+                options.AddPolicy("*",
                     policy =>
                     {
-                        policy.WithOrigins("http://localhost:4200")
+                        policy.AllowAnyOrigin()
                               .AllowAnyHeader()
                               .AllowAnyMethod();
                     });
@@ -42,7 +42,7 @@ namespace MeuCorre
 
             app.UseHttpsRedirection();
 
-            app.UseCors("PermitirAngularDev");
+            app.UseCors("*");
 
             app.UseAuthorization();
 
