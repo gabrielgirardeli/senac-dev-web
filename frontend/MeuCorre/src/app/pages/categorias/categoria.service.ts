@@ -14,7 +14,8 @@ export class CategoriaService {
 
   obterTodasPorUsuario(): Observable<CategoriaModel[]> 
   {
-    return this.http.get<CategoriaModel[]>(`${this.apiUrl }/ObterTodasPorUsuario`); // corrigir isso gabriel 14/11/2025
-
+   const result = this.http.get<CategoriaModel[]>(`${this.apiUrl}/ObterTodasPorUsuario`);
+   console.log(result);
+   return result;
   }
 }

@@ -19,6 +19,17 @@ namespace MeuCorre
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("PermitirAngularDev",
+                    policy =>
+                    {
+                        policy.WithOrigins("https://localhost:7160")
+                              .AllowAnyHeader()
+                              .AllowAnyMethod();
+                    });
+            }
+            );
 
             var app = builder.Build();
 
@@ -30,6 +41,8 @@ namespace MeuCorre
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("PermitirAngularDev");
 
             app.UseAuthorization();
 

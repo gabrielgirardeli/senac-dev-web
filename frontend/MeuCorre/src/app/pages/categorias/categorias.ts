@@ -123,9 +123,7 @@ listaCategorias = signal<CategoriaModel[]>([]);
   }
 
   excluirCategoria(id: string) {
-    this.listaCategorias = this.listaCategorias().filter(
-      (categoria) => categoria.id !== id.toString()
-    );
+    
   }
 
   editarCategoria() {
