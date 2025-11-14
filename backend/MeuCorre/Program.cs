@@ -24,7 +24,7 @@ namespace MeuCorre
                 options.AddPolicy("PermitirAngularDev",
                     policy =>
                     {
-                        policy.WithOrigins("https://localhost:7160")
+                        policy.WithOrigins("http://localhost:4200")
                               .AllowAnyHeader()
                               .AllowAnyMethod();
                     });
