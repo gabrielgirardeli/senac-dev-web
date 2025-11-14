@@ -1,0 +1,144 @@
+  {
+  // ========================================
+  // Angular HTML - Syntax Highlighting
+  // ========================================
+  "vscode-angular-html.colorCustomizations": true,
+  "vscode-angular-html.angularAnimationTriggerPrefix": "#D16969",
+  "vscode-angular-html.angularBindingAttributeDelimiter": "#D16969",
+  "vscode-angular-html.angularExpression": "#D16969",
+  "vscode-angular-html.angularPrefixedAttributesRefPrefix": "#bc8f69",
+  "vscode-angular-html.angularSyntaxSugarAttributesPrefix": "#e4b75f",
+  "vscode-angular-html.angularTemplateVariablePrefix": "#D16969",
+  "vscode-angular-html.dtdDoctypeQuantifier": "#D16969",
+  "vscode-angular-html.xmlAttributeNamespaceDivider": "#D16969",
+  "vscode-angular-html.xmlTagNamespaceDivider": "#D16969",
+  "vscode-angular-html.htmlCustomTags": "#5eba7d",
+  "vscode-angular-html.angularTemplateVariableName": "#359569",
+  "vscode-angular-html.angularSyntaxSugarAttributesName": "#e4b75f",
+  "vscode-angular-html.angularPrefixedAttributesVariableName": "#bc8f69",
+  "vscode-angular-html.angularAndAngularMaterialElementTags": "#25a691",
+  "vscode-angular-html.angularPrefixedAttributesRxjsSuffix": "#bc8f69",
+  "vscode-angular-html.controlFlowKeyword": "#fcea23",
+  "vscode-angular-html.controlFlowPrefix": "#fcea23",
+  // ========================================
+  // Editor Token Color Customizations
+  // ========================================
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "html-template.tag.custom",
+        "settings": {
+          "foreground": "#5eba7d"
+        }
+      },
+      {
+        "scope": "html-template.ng.interpolation.begin",
+        "settings": {
+          "foreground": "#D16969"
+        }
+      },
+      {
+        "scope": "html-template.ng.interpolation.end",
+        "settings": {
+          "foreground": "#D16969"
+        }
+      },
+      {
+        "scope": "entity.name.tag.html.ng",
+        "settings": {
+          "foreground": "#25a691"
+        }
+      },
+      {
+        "scope": "html-template.ng.attributes.animationtrigger.prefix",
+        "settings": {
+          "foreground": "#D16969"
+        }
+      },
+      {
+        "scope": "punctuation.definition.ng-binding-name.begin.html",
+        "settings": {
+          "foreground": "#D16969"
+        }
+      },
+      {
+        "scope": "punctuation.definition.ng-binding-name.end.html",
+        "settings": {
+          "foreground": "#D16969"
+        }
+      },
+      {
+        "scope": "html-template.ng.attributes.prefix.ref",
+        "settings": {
+          "foreground": "#bc8f69"
+        }
+      },
+      {
+        "scope": "html-template.ng.attributes.suffix.name",
+        "settings": {
+          "foreground": "#bc8f69"
+        }
+      },
+      {
+        "scope": "html-template.ng.attributes.suffix.rxjs",
+        "settings": {
+          "foreground": "#bc8f69"
+        }
+      },
+      {
+        "scope": "html-template.ng.attributes.prefix.sugar",
+        "settings": {
+          "foreground": "#e4b75f"
+        }
+      },
+      {
+        "scope": "html-template.ng.attributes.suffix.sugar",
+        "settings": {
+          "foreground": "#e4b75f"
+        }
+      },
+      {
+        "scope": "html-template.ng.attributes.template.prefix",
+        "settings": {
+          "foreground": "#D16969"
+        }
+      },
+      {
+        "scope": "html-template.ng.attributes.template.variable",
+        "settings": {
+          "foreground": "#359569"
+        }
+      },
+      {
+        "scope": "html-template.ng.control-flow.prefix",
+        "settings": {
+          "foreground": "#fcea23"
+        }
+      },
+      {
+        "scope": "html-template.ng.control-flow.keyword",
+        "settings": {
+          "foreground": "#fcea23"
+        }
+      },
+      {
+        "scope": "html-template.ng.tag.colon",
+        "settings": {
+          "foreground": "#D16969"
+        }
+      },
+      {
+        "scope": "html-template.ng.attributes.colon",
+        "settings": {
+          "foreground": "#D16969"
+        }
+      },
+      {
+        "scope": "html-template.ng.occurrence.dtd",
+        "settings": {
+          "foreground": "#D16969"
+        }
+      }
+    ]
+  }
+}

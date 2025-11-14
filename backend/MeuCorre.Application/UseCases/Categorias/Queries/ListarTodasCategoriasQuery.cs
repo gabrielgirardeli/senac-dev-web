@@ -32,6 +32,7 @@ namespace MeuCorre.Application.UseCases.Categorias.Queries
             {
                 categorias.Add(new CategoriaDto
                 {
+                    Id = cat.Id,
                     Nome = cat.Nome,
                     Ativo = cat.Ativo,
                     Tipo = cat.TipoDaTransacao,

@@ -1,0 +1,128 @@
+<div class="card">
+	<div class="card-body">
+		<div class="d-flex">
+			<h5 class="card-title">Categorias</h5>
+			<button class="btn btn-sm btn-primary ms-auto" (click)="open(modalCategorias)">
+				<i class="ri-add-line me-1"></i> Nova Categoria
+			</button>
+		</div>
+
+		<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+			<li [ngbNavItem]="1">
+				<a ngbNavLink>Despesas</a>
+				<ng-template ngbNavContent>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col"></th>
+								<th scope="col">Nome</th>
+								<th scope="col">Descrição</th>
+								<th scope="col">Status</th>
+								<th scope="col">Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for (despesa of listaDespesas; track despesa.id; let i = $index) {
+							<tr>
+								<td>
+									<app-icon-avatar [icone]="despesa.icone" [cor]="despesa.cor"></app-icon-avatar>
+								</td>
+								<td>{{ despesa.nome }}</td>
+								<td>{{ despesa.descricao }}</td>
+								<td><app-status-badge [status]="despesa.ativo"></app-status-badge></td>
+								<td>
+									<button type="button" class="btn btn-sm btn-outline-dark me-1" placement="top" ngbTooltip="Editar categoria">
+										<i class="ri-pencil-line"></i>
+									</button>
+									<button (click)="excluirCategoria(despesa.id)" type="button" class="btn btn-sm btn-outline-danger" placement="top" ngbTooltip="Excluír categoria">
+										<i class="ri-delete-bin-2-line"></i>
+									</button>
+								</td>
+							</tr>
+							}
+						</tbody>
+					</table>
+				</ng-template>
+			</li>
+			<li [ngbNavItem]="2">
+				<a ngbNavLink>Receitas</a>
+				<ng-template ngbNavContent>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th scope="col"></th>
+								<th scope="col">Nome</th>
+								<th scope="col">Descrição</th>
+								<th scope="col">Status</th>
+								<th scope="col">Ações</th>
+							</tr>
+						</thead>
+						<tbody>
+							@for (receita of listaReceitas; track receita.id; let i = $index) {
+							<tr>
+								<td>
+									<app-icon-avatar [icone]="receita.icone" [cor]="receita.cor"></app-icon-avatar>
+								</td>
+								<td>{{ receita.nome }}</td>
+								<td>{{ receita.descricao }}</td>
+								<td><app-status-badge [status]="receita.ativo"></app-status-badge></td>
+								<td>								
+									<td>
+									<button (click)="open(modalCategorias, receita)" type="button" class="btn btn-sm btn-outline-dark me-1" placement="top" ngbTooltip="Editar categoria">
+										<i class="ri-pencil-line"></i>
+									</button>
+									<button (click)="excluirCategoria(receita.id)" type="button" class="btn btn-sm btn-outline-danger" placement="top" ngbTooltip="Excluír categoria">
+										<i class="ri-delete-bin-2-line"></i>
+									</button>
+								</td>
+							</tr>
+							}
+						</tbody>
+					</table>
+				</ng-template>
+			</li>
+		</ul>
+
+		<div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+		<pre>Active: {{ active }}</pre>
+
+		<ng-template #modalCategorias let-modal>
+			<div class="modal-header">
+				<h4 class="modal-title" id="modal-basic-title">
+					{{ editandoCategoria? 'Editar categoria' : 'Nova categoria'}}
+				</h4>
+				<button type="button" class="btn-close" aria-label="Close"
+					(click)="modal.dismiss('Cross click')"></button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="mb-3">
+						<label for="txtNome" class="form-label">Nome da categoria</label>
+						<input [formControl]="nome" type="text" class="form-control" id="txtNome" />
+					</div>
+					<div class="mb-3">
+						<label for="txtDescricao" class="form-label">Descrição</label>
+						<input [formControl]="descricao" type="text" class="form-control" id="txtDescricao" />
+					</div>
+					<div class="mb-3">
+						<label for="txtCor" class="form-label">Cor</label>
+						<input [formControl]="cor" type="color" class="form-control" id="txtCor" />
+					</div>
+					<div class="mb-3">
+						<label for="txtIcone" class="form-label">Ícone</label>
+						<input [formControl]="icone" type="text" class="form-control" id="txtIcone" placeholder="ri ri-add-line" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-outline-secondary"
+					(click)="editandoCategoria ? editarCategoria() : cadastrarCategoria()">Salvar</button>
+			</div>
+		</ng-template>
+
+		<hr />
+
+		<pre>{{ closeResult() }}</pre>
+	</div>
+</div>
