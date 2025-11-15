@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, TemplateRef, WritableSignal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, TemplateRef, WritableSignal } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
   ModalDismissReasons,
@@ -17,49 +17,59 @@ import { CategoriaService } from './categoria.service';
   templateUrl: './categorias.html',
   styleUrl: './categorias.css',
 })
-export class Categorias implements OnInit {
- 
+export class Categorias implements OnInit  {
+
   private modalService = inject(NgbModal);
-  private CategoriaService = inject(CategoriaService);
+  private categoriaService = inject(CategoriaService);
+
   closeResult: WritableSignal<string> = signal('');
 
   nome = new FormControl('');
   descricao = new FormControl('');
   cor = new FormControl('');
   icone = new FormControl('');
+  tipo = new FormControl('despesa');
 
   active = 1;
   editandoCategoria = false;
   idEditandoCategoria = '';
 
+  listaCategorias = signal<CategoriaModel[]>([]);
 
-listaCategorias = signal<CategoriaModel[]>([]);
+  // Listas derivadas (automáticas) para separar receitas e despesas
+  listaReceitas = computed(() => this.listaCategorias().filter((c) => c.tipo === 'receita'));
+  listaDespesas = computed(() => this.listaCategorias().filter((c) => c.tipo === 'despesa'));
 
-
-
-
-
-
-
-  get listaReceitas(): CategoriaModel[] {
-    return this.listaCategorias().filter((categoria) => categoria.tipo === 'receita');
+  ngOnInit(): void {
+    // Ao iniciar a tela, buscamos as categorias do usuário
+    this.carregarCategorias();
   }
 
-  get listaDespesas(): CategoriaModel[] {
-    return this.listaCategorias().filter((categoria) => categoria.tipo === 'despesa');
-  }
 
- ngOnInit(): void {
-    this.carregarTodasCategorias();
-  }
-
-  carregarTodasCategorias() {
-    this.CategoriaService.obterTodasPorUsuario().subscribe({
-      next: (dados) => {
-        this.listaCategorias.set(dados);
+  // Busca as categorias no backend e garante que o campo "tipo" fique em string
+  carregarCategorias(){
+    this.categoriaService.obterTodasPorUsuario().subscribe({
+      next:(dados) => {
+        // Mapeia os dados para o modelo do frontend
+        const categoriasMapeadas = dados.map((c) => {
+          const item: CategoriaModel = {
+            id: c.id,
+            nome: c.nome,
+            descricao: c.descricao,
+            cor: c.cor,
+            icone: c.icone,
+            // Normaliza 'tipo' para string para o frontend
+            tipo: c.tipo === '1' ? 'receita' : 'despesa',
+            ativo: c.ativo,
+          };
+        return item;
+        });
+        this.listaCategorias.set(categoriasMapeadas);
       },
-     
-  })
+      error: (err) => {
+        console.error('Erro ao carregar categorias:', err);
+      }
+    })
   }
 
   open(content: TemplateRef<any>, categoria?: CategoriaModel) {
@@ -70,12 +80,14 @@ listaCategorias = signal<CategoriaModel[]>([]);
       this.descricao.setValue(categoria.descricao);
       this.cor.setValue(categoria.cor);
       this.icone.setValue(categoria.icone);
+      this.tipo.setValue(categoria.tipo);
     } else {
       this.editandoCategoria = false;
       this.nome.reset();
       this.descricao.reset('');
       this.cor.reset('');
       this.icone.reset('');
+      this.tipo.setValue('despesa');
     }
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {},
@@ -96,45 +108,48 @@ listaCategorias = signal<CategoriaModel[]>([]);
     }
   }
 
+  // Cadastra uma nova categoria (apenas no frontend por enquanto)
   cadastrarCategoria() {
-    if (this.active === 1) {
-      this.listaCategorias().push({
-        id: this.listaCategorias.length + 1 + '',
-        nome: this.nome.value!,
-        descricao: this.descricao.value!,
-        cor: this.cor.value!,
-        icone: this.icone.value!,
-        ativo: true,
-        tipo: 'despesa',
-      });
-    } else {
-      this.listaCategorias().push({
-        id: this.listaCategorias.length + 1 + '',
-        nome: this.nome.value!,
-        descricao: this.descricao.value!,
-        cor: this.cor.value!,
-        icone: this.icone.value!,
-        ativo: true,
-        tipo: 'receita',
-      });
-    }
-
+    const novaCategoria: CategoriaModel = {
+      id: (this.listaCategorias().length + 1).toString(),
+      nome: this.nome.value ?? '',
+      descricao: this.descricao.value ?? '',
+      cor: this.cor.value ?? '#000000',
+      icone: this.icone.value ?? 'ri-question-line',
+      // Mantém 'tipo' como string no frontend para filtragem
+      tipo: this.tipo.value ?? 'despesa',
+      ativo: true,
+    };
+    // TODO: Chamar o serviço para cadastrar no backend e depois atualizar a lista
+    this.listaCategorias.update(categorias => [...categorias, novaCategoria]);
     this.modalService.dismissAll();
   }
 
+  // Remove uma categoria da lista pelo id (frontend)
   excluirCategoria(id: string) {
-    
+    this.listaCategorias.update(categorias => categorias.filter(c => c.id !== id));
   }
 
+  // Edita a categoria selecionada usando os valores do formulário (frontend)
   editarCategoria() {
-    const categoria = this.listaCategorias().find((c) => c.id === this.idEditandoCategoria);
-    if (categoria) {
-      categoria.nome = this.nome.value!;
-      categoria.descricao = this.descricao.value!;
-      categoria.cor = this.cor.value!;
-      categoria.icone = this.icone.value!;
-    }
-    console.log(this.listaCategorias);
+    this.listaCategorias.update(categorias =>
+      categorias.map(c => {
+        if (c.id !== this.idEditandoCategoria) {
+          return c;
+        }
+        const atualizado: CategoriaModel = {
+          id: c.id,
+          nome: this.nome.value ?? c.nome,
+          descricao: this.descricao.value ?? c.descricao,
+          cor: this.cor.value ?? c.cor,
+          icone: this.icone.value ?? c.icone,
+          // Mantém 'tipo' como string no frontend para filtragem
+          tipo: this.tipo.value ?? c.tipo,
+          ativo: c.ativo,
+        };
+        return atualizado;
+      })
+    );
     this.modalService.dismissAll();
   }
 }
